@@ -4,7 +4,7 @@ A full-stack MERN application for media upload and management. The app allows us
 
 ## Live Demo
 
-- **Frontend (Vercel)**: [Media Gallery](https://media-gallery-one.vercel.app/dashboard)
+- **Frontend (Vercel)**: [Media Gallery](https://media-gallery-one.vercel.app/)
 - **Backend (Heroku)**: [API Server](https://my-media-app-backend.herokuapp.com/)
 
 ## Features
