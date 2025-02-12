@@ -4,7 +4,10 @@ const cors = require('cors'); // Import cors
 require('dotenv').config();
 
 const app = express();
-app.use(cors({ origin: '*' }));
+app.use(cors({ 
+  origin: 'https://media-gallery-one.vercel.app',
+  credentials: true,
+}));
 app.use(express.json());
 
 // Connect to MongoDB
