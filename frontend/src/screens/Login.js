@@ -21,7 +21,7 @@ const Login = () => {
       });
       const { token, user } = response.data;
   
-      localStorage.setItem('token', token);  // Store token ✅
+      localStorage.setItem('token', token);  // Store token locally
       dispatch(setCredentials({ user, token })); // Save in Redux
       navigate('/dashboard'); // Redirect
     } catch (err) {
@@ -31,48 +31,6 @@ const Login = () => {
   
 
   return (
-    // <Container maxWidth="sm">
-    //   <Box sx={{ mt: 8, textAlign: 'center' }}>
-    //     <Typography variant="h4" gutterBottom>
-    //       Login
-    //     </Typography>
-    //     {error && <Typography color="error">{error}</Typography>}
-    //     <form onSubmit={handleSubmit}>
-    //       <TextField
-    //         fullWidth
-    //         label="Username"
-    //         variant="outlined"
-    //         margin="normal"
-    //         value={username}
-    //         onChange={(e) => setUsername(e.target.value)}
-    //         required
-    //       />
-    //       <TextField
-    //         fullWidth
-    //         label="Password"
-    //         type="password"
-    //         variant="outlined"
-    //         margin="normal"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //         required
-    //       />
-    //       <Button
-    //         type="submit"
-    //         variant="contained"
-    //         color="primary"
-    //         fullWidth
-    //         sx={{ mt: 3, mb: 2 }}
-    //       >
-    //         Login
-    //       </Button>
-    //     </form>
-    //     <Typography>
-    //       Don't have an account? <Button onClick={() => navigate('/register')}>Register here</Button>
-    //     </Typography>
-    //   </Box>
-    // </Container>
-
     <Card sx={{ maxWidth: 400, margin: "auto", mt: 15, p: 2, boxShadow: 3 }}>
         <CardContent>
             <Typography variant="h5" textAlign="center">Login</Typography>

@@ -25,48 +25,6 @@ const Register = () => {
   };
 
   return (
-    // <Container maxWidth="sm">
-    //   <Box sx={{ mt: 8, textAlign: 'center' }}>
-    //     <Typography variant="h4" gutterBottom>
-    //       Register
-    //     </Typography>
-    //     {error && <Typography color="error">{error}</Typography>}
-    //     <form onSubmit={handleSubmit}>
-    //       <TextField
-    //         fullWidth
-    //         label="Username"
-    //         variant="outlined"
-    //         margin="normal"
-    //         value={username}
-    //         onChange={(e) => setUsername(e.target.value)}
-    //         required
-    //       />
-    //       <TextField
-    //         fullWidth
-    //         label="Password"
-    //         type="password"
-    //         variant="outlined"
-    //         margin="normal"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //         required
-    //       />
-    //       <Button
-    //         type="submit"
-    //         variant="contained"
-    //         color="primary"
-    //         fullWidth
-    //         sx={{ mt: 3, mb: 2 }}
-    //       >
-    //         Register
-    //       </Button>
-    //     </form>
-    //     <Typography>
-    //       Already have an account? <Button onClick={() => navigate('/login')}>Login here</Button>
-    //     </Typography>
-    //   </Box>
-    // </Container>
-
     <Card sx={{ maxWidth: 400, margin: "auto", mt: 15, p: 2, boxShadow: 3 }}>
         <CardContent>
             <Typography variant="h5" textAlign="center">Register</Typography>

@@ -44,17 +44,42 @@ const Dashboard = () => {
         }
     };
 
+    // const handleDelete = async (id) => {
+    //     try {
+    //         console.log(localStorage.getItem('token'));
+    //         await axios.delete(`http://localhost:5000/api/media/${id}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${localStorage.getItem('token')}`,
+    //             },
+    //         });
+    //         setMedia(media.filter(item => item._id !== id));
+    //         fetchMedia(); // Refresh the media list
+    //     } catch (err) {
+    //         console.error('Failed to delete media:', err);
+    //     }
+    // };
+
     const handleDelete = async (id) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("You are not authenticated. Please log in again.");
+            return;
+        }
+    
         try {
-            await axios.delete(`http://localhost:5000/api/media/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
+            const response = await axios.delete(`http://localhost:5000/api/media/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
             });
-            setMedia(media.filter(item => item._id !== id));
-            fetchMedia(); // Refresh the media list
+    
+            if (response.status === 200) {
+                setMedia(prevMedia => prevMedia.filter(item => item._id !== id)); // ✅ Update UI instantly
+                console.log("Media deleted successfully!");
+            } else {
+                throw new Error("Unexpected response status: " + response.status);
+            }
         } catch (err) {
-            console.error('Failed to delete media:', err);
+            console.error('Delete failed:', err);
+            alert(err.response?.data?.error || "Failed to delete media.");
         }
     };
 
@@ -117,7 +142,6 @@ const Dashboard = () => {
                 </Typography>
                 <div style={{marginBottom: 10, height: 20}}>
                     <FormControl fullWidth style={{ maxWidth: 200, marginTop: -5 }}>
-                        {/* <InputLabel id="filter-label">Filter</InputLabel> */}
                         <Select
                             labelId="filter-label"
                             id="filter-select"
@@ -223,44 +247,50 @@ const Dashboard = () => {
             
 
             <Grid container spacing={3}>
-            {sortedFilteredMedia.map((item) => (
-                <Grid item key={item._id} xs={12} sm={6} md={4}>
-                    <Card 
-                        sx={{
-                            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.8)', // Custom shadow
-                            borderRadius: '8px', // Optional: Add rounded corners
-                            transition: 'box-shadow 0.3s ease-in-out', // Optional: Add hover effect
-                            '&:hover': {
-                              boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.2)', // Shadow on hover
-                            },
-                          }}
-                    >
-                        <CardMedia
-                            component={item.filename.match(/\.(mp4|mov|avi)$/i) ? 'video' : 'img'}
-                            src={item.url || 'default-placeholder.png'}  // Fallback to a default image
-                            alt={item.filename}
-                            controls={item.filename.match(/\.(mp4|mov|avi)$/i)}
-                            style={{ height: '200px', objectFit: 'cover' }}
-                            onError={(e) => e.target.src = 'default-placeholder.png'} // Handle broken images
-                        />
-                        <Button
-                            variant="contained"
-                            fullWidth
-                            onClick={() => handleDelete(item._id)}
-                            startIcon={<DeleteIcon />}
+                {sortedFilteredMedia.length===0 ? 
+                <Typography variant='h6' style={{ flexGrow: 1, fontFamily: '-moz-initial', fontWeight: '600', textAlign: 'center', marginTop: 100 }}>
+                    No media found! Upload to see media.
+                </Typography>  
+                : <> 
+                {sortedFilteredMedia.map((item) => (
+                    <Grid item key={item._id} xs={12} sm={6} md={4}>
+                        <Card 
                             sx={{
-                                backgroundColor: '#000',
-                                color: (theme) => theme.palette.getContrastText('#000'), // Dynamically set text color
+                                boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.8)', // Custom shadow
+                                borderRadius: '8px', // Optional: Add rounded corners
+                                transition: 'box-shadow 0.3s ease-in-out', // Optional: Add hover effect
                                 '&:hover': {
-                                  backgroundColor: '#333', // Darker black on hover
+                                boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.2)', // Shadow on hover
                                 },
                             }}
                         >
-                            Delete
-                        </Button>
-                    </Card>
-                </Grid>
-            ))}
+                            <CardMedia
+                                component={item.filename.match(/\.(mp4|mov|avi)$/i) ? 'video' : 'img'}
+                                src={item.url || 'default-placeholder.png'}  // Fallback to a default image
+                                alt={item.filename}
+                                controls={item.filename.match(/\.(mp4|mov|avi)$/i)}
+                                style={{ height: '200px', objectFit: 'cover' }}
+                                onError={(e) => e.target.src = 'default-placeholder.png'} // Handle broken images
+                            />
+                            <Button
+                                variant="contained"
+                                fullWidth
+                                onClick={() => handleDelete(item._id)}
+                                startIcon={<DeleteIcon />}
+                                sx={{
+                                    backgroundColor: '#000',
+                                    color: (theme) => theme.palette.getContrastText('#000'), // Dynamically set text color
+                                    '&:hover': {
+                                    backgroundColor: '#333', // Darker black on hover
+                                    },
+                                }}
+                            >
+                                Delete
+                            </Button>
+                        </Card>
+                    </Grid>
+                ))}
+                </>}
             </Grid>
             </>}
         </Container>
