@@ -41,7 +41,7 @@ npm start
 The backend server will start on http://localhost:5000 (or as configured in the environment variables).
 
 ### 3️⃣ Open the Frontend
-Once the backend server is running, you can open the frontend by visiting this [Live link](https://google.com)
+Once the backend server is running, you can open the frontend by visiting this [Live link](https://media-gallery-one.vercel.app/)
 
 ## 📌 API Endpoints
 
