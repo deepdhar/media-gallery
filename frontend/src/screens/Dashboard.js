@@ -44,21 +44,6 @@ const Dashboard = () => {
         }
     };
 
-    // const handleDelete = async (id) => {
-    //     try {
-    //         console.log(localStorage.getItem('token'));
-    //         await axios.delete(`http://localhost:5000/api/media/${id}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-    //             },
-    //         });
-    //         setMedia(media.filter(item => item._id !== id));
-    //         fetchMedia(); // Refresh the media list
-    //     } catch (err) {
-    //         console.error('Failed to delete media:', err);
-    //     }
-    // };
-
     const handleDelete = async (id) => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -72,7 +57,7 @@ const Dashboard = () => {
             });
     
             if (response.status === 200) {
-                setMedia(prevMedia => prevMedia.filter(item => item._id !== id)); // ✅ Update UI instantly
+                setMedia(prevMedia => prevMedia.filter(item => item._id !== id));
                 console.log("Media deleted successfully!");
             } else {
                 throw new Error("Unexpected response status: " + response.status);
