@@ -33,7 +33,7 @@ const Dashboard = () => {
         }
 
         try {
-            const response = await axios.get('localhost:5000/api/media', {
+            const response = await axios.get('http://localhost:5000/api/media', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`localhost:5000/api/media/${id}`, {
+            await axios.delete(`http://localhost:5000/api/media/${id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -79,7 +79,7 @@ const Dashboard = () => {
         formData.append("file", selectedFile);
 
         try {
-            const response = await axios.post('localhost:5000/api/media/upload', formData, {
+            const response = await axios.post('http://localhost:5000/api/media/upload', formData, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                     "Content-Type": "multipart/form-data",
