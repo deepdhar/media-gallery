@@ -32,12 +32,14 @@ git clone https://github.com/your-username/media-gallery.git
 cd media-gallery
 ```
 
-### 2️⃣ Run the Backend
+### 2️⃣ Run the Backend (Not mandatory)
 ```bash
 cd backend
 npm install
 npm start
 ```
+**Note: You can skip this step, as for testing purposes, I have the server running on my system 24x7**
+
 The backend server will start on http://localhost:5000 (or as configured in the environment variables).
 
 ### 3️⃣ Open the Frontend
