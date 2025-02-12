@@ -4,13 +4,15 @@ const cors = require('cors'); // Import cors
 require('dotenv').config();
 
 const app = express();
-// app.use(cors({ 
-//   origin: 'https://media-gallery-one.vercel.app',
-//   credentials: true,
-// }));
-// temporarily allowed all origins
-app.use(cors());
+// app.use(cors({ origin: '*' }));
+app.use(cors({
+  origin: 'https://media-gallery-one.vercel.app',
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
+app.options('*', cors());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
